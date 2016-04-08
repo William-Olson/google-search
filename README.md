@@ -6,12 +6,12 @@ This node.js module is intended for who wants to interact with the [Google Custo
 ## Install
 
 ```
-npm install google-search
+npm install wko-google-search
 ```
 
 ## Usage
 ```js
-var GoogleSearch = require('google-search');
+var GoogleSearch = require('wko-google-search');
 var googleSearch = new GoogleSearch({
   key: 'YOUR_API_KEY',
   cx: 'YOUR_CX'

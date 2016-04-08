@@ -1,12 +1,12 @@
 {
-    "name": "google-search",
+    "name": "wko-google-search",
     "description": "node.js client for google search API",
-    "version": "0.0.2",
-    "homepage": "http://github.com/aykutyaman/google-search",
-    "author": "Aykut Yaman <yaman.ayk@gmail.com>",
+    "version": "1.0.0",
+    "homepage": "https://github.com/William-Olson/google-search",
+    "author": "Will Olson <willko747@gmail.com>",
     "repository": {
 	  "type": "git",
-	  "url": "http://github.com/aykutyaman/google-search.git" 
+	  "url": "http://github.com/William-Olson/google-search.git" 
     },
     "dependencies": {
 	  "url": "0.7.9"
