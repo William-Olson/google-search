@@ -1,61 +1,75 @@
 #!/usr/bin/env node
-'use strict';
 
-
-var GoogleSearch = require('../lib/google-search');
+const GoogleSearch = require('../lib/google-search');
 
 // get environment variables
 const KEY = process.env.GOOG_API_KEY;
 const CX = process.env.GOOG_API_CX;
 
 // create a searcher
-var googleSearch = new GoogleSearch({
+const googleSearch = new GoogleSearch({
   key: KEY,
   cx: CX
 });
 
+// ------ Execute Query -------
 
- // perform a search with 20 results
- search('kung fu', function (err, resp) {
-   if(err) console.error(err);
-   else {
-    console.dir(resp);
-    console.info(resp.items.length + ' total');
-   }
- });
+getPages(
+  'kung fu',
+  { limit: 20, offset: 0 },
+  hits => logItems(hits)
+);
 
+// ----------------------------
 
+/**
+ * retrieves from offset up to (offset + limit) recursively
+ * and calls callback with results when done
+ */
+function getPages(q, { limit=1, offset=0, next=0 }, cb, results=[])
+{
+  // determine how many are left to fetch
+  const leftToRetrieve = ((limit + offset) - (offset + next)) < 1 ?
+                  10 : Math.abs((limit + offset) - (offset + next));
 
-function search(term, cb) {
-
-  // object used to build query
-  let req = {
-    q: term,
-    num: 10, //max is 10
-    start: 1
+  const query = {
+   q,
+   num: limit < 10 ? limit :
+      (leftToRetrieve < 10) ? leftToRetrieve : 10,
+   start: (offset + next) === 0 ? (offset + next + 1) : (offset + next)
   };
+  const last = (query.start + 10) >= (offset + limit);
 
-  // send query
-  googleSearch.build(req, (err1, res1) => {
-    if(err1) cb(err1);
-      if(res1.searchInformation && res1.searchInformation.totalResults > 10) {
+  googleSearch.build(query, (err, r) => {
+   checkError(err);
+   results = results.concat(r.items.map((h, i) => {
+     return Object.assign({}, h, { numIndex: (query.start + i) });
+   }));
 
-        //perform the nextPage query
-        req.start = 11;
-        googleSearch.build(req, (err2, res2) => {
-          if(err2) cb(err2);
+   if (last) {
+     return cb(results);
+   }
 
-          //concat results and return them
-          if(res2.items)
-            res1.items = res1.items.concat(res2.items);
-
-          //return response
-          cb(null, res1);
-        });
-
-      } else{
-        cb(null, res1);
-      }
-
+   return getPages(q, { limit, offset, next: next + 10 }, cb, results);
   });
-};
+}
+
+// simple helpers
+
+function checkError(err)
+{
+  if(err) {
+    throw err;
+  }
+}
+
+function logItems(items)
+{
+ items.forEach((h, i) =>
+   console.log(
+     `${h.numIndex}. ${h.title}`,
+     `\n${h.snippet}`,
+     `\n${h.link}\n\n`
+   ));
+}
+
