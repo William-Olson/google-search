@@ -10,14 +10,34 @@ npm install wko-google-search
 ```
 
 ## Usage
+
 ```js
-var GoogleSearch = require('wko-google-search');
-var googleSearch = new GoogleSearch({
+const GoogleSearch = require('wko-google-search');
+const googleSearch = new GoogleSearch({
   key: 'YOUR_API_KEY',
   cx: 'YOUR_CX'
 });
 
+googleSearch.fetch('foo', (err, hits) => {
+  console.log(hits);
+});
+```
 
+**You can pass in limit and offset in options as 2nd param**
+
+```js
+googleSearch.fetch('foo', {
+  offset: 25,
+  limit: 50
+}, (err, hits) => {
+  console.log(hits);
+});
+```
+
+
+**Or you can build a more elaborate query with the build method**
+
+```js
 googleSearch.build({
   q: "",
   start: 5,
