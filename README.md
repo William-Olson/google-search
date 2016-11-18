@@ -39,13 +39,13 @@ googleSearch.fetch('foo', {
 
 ```js
 googleSearch.build({
-  q: "",
+  q: 'foo',
   start: 5,
-  fileType: "pdf",
-  gl: "tr", //geolocation,
-  lr: "lang_tr",
+  fileType: 'pdf',
+  gl: 'tr', //geolocation,
+  lr: 'lang_tr',
   num: 10, // Number of search results to return between 1 and 10, inclusive
-  siteSearch: "http://kitaplar.ankara.edu.tr/" // Restricts results to URLs from a specified site
+  siteSearch: 'http://kitaplar.ankara.edu.tr/' // Restricts results to URLs from a specified site
 }, function(error, response) {
   console.log(response);
 });
