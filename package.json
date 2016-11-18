@@ -1,14 +1,14 @@
 {
-    "name": "wko-google-search",
-    "description": "node.js client for google search API",
-    "version": "1.0.0",
-    "homepage": "https://github.com/William-Olson/google-search",
-    "author": "Will Olson <willko747@gmail.com>",
-    "repository": {
-	  "type": "git",
-	  "url": "http://github.com/William-Olson/google-search.git" 
-    },
-    "dependencies": {
-	  "url": "0.7.9"
-    }
+  "name": "wko-google-search",
+  "description": "node.js client for google search API",
+  "version": "2.0.0",
+  "homepage": "https://github.com/William-Olson/google-search",
+  "author": "Will Olson <willko747@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/William-Olson/google-search.git"
+  },
+  "dependencies": {
+    "url": "0.7.9"
+  }
 }
