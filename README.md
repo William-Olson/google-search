@@ -1,7 +1,9 @@
 #google-search
 
-Query Google search API using REST
-This node.js module is intended for who wants to interact with the [Google Custom Search API](https://developers.google.com/custom-search/v1/using_rest). This module requires that you have a [Google API Key](https://code.google.com/apis/console/) and [Google CX](http://www.google.com/cse/manage/create).
+Query Google search API using REST.
+
+
+Intended for interacting with the [Google Custom Search API](https://developers.google.com/custom-search/v1/using_rest). This module requires that you have a [Google API Key](https://code.google.com/apis/console/) and [Google CX](http://www.google.com/cse/manage/create).
 
 ## Install
 
